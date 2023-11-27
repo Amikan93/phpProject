@@ -12,6 +12,6 @@ class ShopController extends Controller
     public function index()
     {
         $products = Product::with('category')->get();
-        return view('shop.index', ['products' => $products]);
+        return $products;
     }
 }
