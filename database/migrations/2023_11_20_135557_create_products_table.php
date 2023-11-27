@@ -15,11 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('product_name');
             $table->decimal('price', 8, 2);
-            $table->unsignedBigInteger('category_id');
             $table->foreignId('category_id')->constrained();
             $table->timestamps();
-
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 
