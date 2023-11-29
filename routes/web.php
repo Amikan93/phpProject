@@ -2,7 +2,8 @@
 
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ShopController;
+use App\Http\Controllers\CategoryController;
 
 
-Route::get('/products', [ProductController::class, 'index']);
-Route::get('/shop', [ShopController::class, 'index']);
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);

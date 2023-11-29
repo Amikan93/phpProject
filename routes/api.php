@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ShopController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +17,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::resource('products', ProductController::class);
+Route::resource('categories', CategoryController::class);
+Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('api.categories.edit');
+Route::post('categories', [CategoryController::class, 'store'])->name('api.categories.store');
+
+// Дополнительный маршрут для метода update в CategoryController
+Route::put('categories/{category}', [CategoryController::class, 'update'])->name('api.categories.update');
+
+// Маршрут для создания новой категории через POST-запрос
+Route::post('categories', [CategoryController::class, 'store'])->name('api.categories.store');
+
+Route::delete('categories/{category}', [CategoryController::class, 'destroy'])->name('api.categories.destroy');
