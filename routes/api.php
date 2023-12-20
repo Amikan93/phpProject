@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ShopController;
+use App\Http\Controllers\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+
+Route::resource('orders', OrderController::class);
+
 
 /*
 |--------------------------------------------------------------------------
@@ -17,10 +20,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Маршруты для ProductController
 Route::resource('products', ProductController::class);
+
+// Маршруты для CategoryController
 Route::resource('categories', CategoryController::class);
 Route::get('categories/{category}/edit', [CategoryController::class, 'edit'])->name('api.categories.edit');
 Route::post('categories', [CategoryController::class, 'store'])->name('api.categories.store');
+
+Route::resource('orders', OrderController::class);
 
 // Дополнительный маршрут для метода update в CategoryController
 Route::put('categories/{category}', [CategoryController::class, 'update'])->name('api.categories.update');
