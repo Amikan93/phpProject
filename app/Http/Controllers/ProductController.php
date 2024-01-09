@@ -21,30 +21,20 @@ class ProductController extends Controller
         return $product;
     }
 
-    // Create - Создание: отображение формы для создания нового продукта
-    public function create()
-    {
-        return view('products.create');
-    }
-
-
-    // Create - Создание: сохранение нового продукта
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
+        $validatedData = $request->validate([
+            'name' => 'required|max:255',
             'price' => 'required|numeric',
+            'category_id' => 'required|exists:categories,id'
         ]);
 
-        $product = Product::create([
-            'product_name' => $request->input('product_name'),
-            'price' => $request->input('price'),
-        ]);
+        $product = Product::create($validatedData);
 
-        return response()->json(['message' => 'Product created successfully', 'product' => $product], 201);
+        return response()->json(['product' => $product], 201);
     }
-
     // Update - Обновление: отображение формы для редактирования продукта
+
     public function edit($id)
     {
         $product = Product::findOrFail($id);
