@@ -22,6 +22,8 @@ Route::resource('orders', OrderController::class);
 
 // Маршруты для ProductController
 Route::resource('products', ProductController::class);
+Route::get('categories/{category_id}/products', [CategoryController::class, 'getProductByCategory']);
+
 
 // Маршруты для CategoryController
 Route::resource('categories', CategoryController::class);

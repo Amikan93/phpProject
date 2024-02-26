@@ -10,4 +10,10 @@ class Category extends Model
     use HasFactory;
 
     protected $fillable = ['category_name'];
+
+    // Связь "один ко многим" с продуктами
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

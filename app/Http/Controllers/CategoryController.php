@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -62,6 +63,11 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return response()->json(['message' => 'Category deleted successfully']);
+        return response()->json(['message' => 'Category deleted successfully']);    
+    }
+
+    public function getProductByCategory($category_id){
+        $products = Product::where('category_id','=', $category_id)->paginate(2);
+        return $products;
     }
 }
